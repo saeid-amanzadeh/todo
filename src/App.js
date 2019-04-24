@@ -19,18 +19,33 @@ class App extends Component {
                 id: 3,
                 title: "Iron clothes",
                 completed: false
-            },
+            }
         ]
     }
+
+    delete = (id) => {
+        this.setState({ todos: [...this.state.todos.filter(todo => todo.id != id)]});
+    }
+
+
+
+    markeComplete = (id) => {
+        this.setState({todos: this.state.todos.map(todo => {
+                if(todo.id === id){
+                    todo.completed = !todo.completed;
+                }
+                return todo;
+            }) });
+    }
+
   render() {
-        console.log(this.state.todos);
     return (
       <div className="App">
           <h1>
               ING
           </h1>
           <h1>
-              <Todos todos={this.state.todos}/>
+              <Todos todos={ this.state.todos } markeComplete={ this.markeComplete } delete={ this.delete } />
           </h1>
       </div>
     );
