@@ -12,12 +12,20 @@ class TodoItem extends Component {
         }
     }
 
+    ischecked = (completed) => {
+        if(completed) {
+            return "checked"
+        }else{
+            return ""
+        };
+    }
+
     render() {
-        const { id, title } = this.props.todo;
+        const { id, title, completed } = this.props.todo;
         return (
             <div style={ this.getStyle() }>
                 <p>
-                    <input type="checkbox" onChange = { this.props.markeComplete.bind(this, id) }/>
+                    <input type="checkbox" checked={this.ischecked(completed) } onChange = { this.props.markeComplete.bind(this, id) }/>
                     &nbsp; {title}
 
                 <button style={ btnStyle } onClick={ this.props.delete.bind(this, id) }>x</button>
